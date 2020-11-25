@@ -1,7 +1,6 @@
 package cl.inacap.simpson.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +32,8 @@ public class PersonajesAdapters extends ArrayAdapter<Personaje> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = this.activity.getLayoutInflater();
-        View rV = inflater.inflate(R.layout.listview_personajes, null, true);
-        TextView nombre = rV.findViewById(R.id.name);
+        View rV = inflater.inflate(R.layout.list_personajes, null, true);
+        TextView nombre = rV.findViewById(R.id.nombre_txt);
         ImageView img = rV.findViewById(R.id.image);
         nombre.setText(personajes.get(position).getCharacter());
         Picasso.get().load(this.personajes.get(position).getImage())

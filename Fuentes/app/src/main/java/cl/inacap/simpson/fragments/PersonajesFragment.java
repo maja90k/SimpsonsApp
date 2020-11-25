@@ -48,9 +48,9 @@ public class PersonajesFragment extends Fragment {
     public void onResume() {
         super.onResume();
         queue = Volley.newRequestQueue(this.getActivity());
-        this.persList = getView().findViewById(R.id.personajes_L_V);
+        this.persList = getView().findViewById(R.id.personajes_Lv);
         this.personajesAdapter = new PersonajesAdapters(this.getActivity()
-        ,R.layout.listview_personajes, this.personajes);
+        ,R.layout.list_personajes, this.personajes);
         this.persList.setAdapter(this.personajesAdapter);
         JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET, "https://thesimpsonsquoteapi.glitch.me/quotes?count=num", null,
                 new Response.Listener<JSONObject>() {
