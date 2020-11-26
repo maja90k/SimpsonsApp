@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import com.squareup.picasso.Picasso;
 
@@ -22,11 +23,13 @@ public class PersonajesAdapters extends ArrayAdapter<Personaje> {
 
     private List<Personaje> personajes;
     private Activity activity;
+
     public PersonajesAdapters(@NonNull Activity context, int resource, @NonNull List<Personaje> objects) {
         super(context, resource, objects);
         this.personajes = objects;
         this.activity = context;
     }
+
 
     @NonNull
     @Override
@@ -34,6 +37,7 @@ public class PersonajesAdapters extends ArrayAdapter<Personaje> {
         LayoutInflater inflater = this.activity.getLayoutInflater();
         View rV = inflater.inflate(R.layout.list_personajes, null, true);
         TextView nombre = rV.findViewById(R.id.nombre_txt);
+        TextView frase = rV.findViewById(R.id.quote);
         ImageView img = rV.findViewById(R.id.image);
         nombre.setText(personajes.get(position).getCharacter());
         Picasso.get().load(this.personajes.get(position).getImage())

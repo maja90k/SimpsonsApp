@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    git
+
     <include layout="@layout/toolbar"> </include>
 
     <Spinner
@@ -24,8 +24,9 @@
         android:text="Solicitar Consejo"
         android:textColor="@color/colorPrimary"></Button>
 
-    <ListView
-        android:id="@+id/list_per"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vPager"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        ></androidx.viewpager.widget.ViewPager>
 </LinearLayout>
