@@ -36,9 +36,9 @@ public class PersonajesAdapters extends ArrayAdapter<Personaje> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = this.activity.getLayoutInflater();
         View rV = inflater.inflate(R.layout.list_personajes, null, true);
-        TextView nombre = rV.findViewById(R.id.nombre_txt);
-        TextView frase = rV.findViewById(R.id.quote);
-        ImageView img = rV.findViewById(R.id.image);
+        TextView nombre =    rV.findViewById(R.id.nombre_txt);
+        TextView frase =     rV.findViewById(R.id.quote);
+        ImageView img =      rV.findViewById(R.id.image);
         nombre.setText(personajes.get(position).getCharacter());
         Picasso.get().load(this.personajes.get(position).getImage())
                 .resize(350,350)
