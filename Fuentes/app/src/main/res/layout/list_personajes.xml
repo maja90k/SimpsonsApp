@@ -2,35 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/nombre_txt"
-            android:textSize="@dimen/nombres"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-        <TextView
-            android:id="@+id/quote"
-            android:textSize="@dimen/nombres"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-    </LinearLayout>
+    android:layout_height="match_parent"
+    android:visibility="visible">
 
 
     <ImageView
         android:id="@+id/image"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="120dp"
+        android:layout_weight="1">
 
     </ImageView>
+
+    <LinearLayout
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nombre_txt"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/nombres"></TextView>
+
+
+        <TextView
+            android:id="@+id/quote"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/nombres"></TextView>
+    </LinearLayout>
+
 </LinearLayout>

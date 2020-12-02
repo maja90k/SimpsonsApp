@@ -5,6 +5,12 @@ public class Personaje {
     private String character;
     private String image;
 
+    public Personaje() {
+        this.quote = quote;
+        this.character = character;
+        this.image = image;
+    }
+
     public String getQuote() {
         return quote;
     }

@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private ListView pl;
     private List<Personaje> personajes;
-    private PersonajesAdapters personajesAdapter;
-    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,22 +60,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.pl = findViewById(R.id.persoList);
-        this.button = findViewById(R.id.soliBtn);
+        jsonDownload();
+
         this.spinner = findViewById(R.id.spinner_per);
         ArrayAdapter<CharSequence> opcion = ArrayAdapter.createFromResource(this, R.array.frases, android.R.layout.simple_spinner_item);
         spinner.setAdapter(opcion);
+
         this.button =   findViewById(R.id.soliBtn);
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (spinner!=null){
-                    jsonDownload();
-                    //deberia de mostrar el viewpager con el consejo y del personaje proviniente.
-                    //Aqui  despues de haber solicitado el "consejo"
 
-
-                    //pero como obtenemos los datos de la api dentro del viewPager?
 
                 }else{
                     Toast.makeText(getApplicationContext(),"Seleccione un personaje", Toast.LENGTH_SHORT).show();
@@ -87,11 +82,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void parJSON(View view){
-
-    }
-
     String url_json = "https://thesimpsonsquoteapi.glitch.me/quotes?count=num";
+
     public void jsonDownload(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url_json, new Response.Listener<String>() {
             @Override
@@ -126,5 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
     }
 }
