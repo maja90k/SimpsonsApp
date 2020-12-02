@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.squareup.picasso.Picasso;
 
@@ -19,27 +20,29 @@ import java.util.List;
 import cl.inacap.simpson.R;
 import cl.inacap.simpson.dto.Personaje;
 
-public class PersonajesAdapters extends ArrayAdapter<Personaje> {
+public class PersonajesAdapters extends ArrayAdapter<Personaje>{
 
     private List<Personaje> personajes;
     private Activity activity;
 
-    public PersonajesAdapters(@NonNull Activity context, int resource, @NonNull List<Personaje> objects) {
+    public PersonajesAdapters(@NonNull Activity context, int resource, @NonNull List<Personaje> objects, ) {
         super(context, resource, objects);
         this.personajes = objects;
         this.activity = context;
     }
-
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = this.activity.getLayoutInflater();
         View rV = inflater.inflate(R.layout.list_personajes, null, true);
+
         TextView nombre =    rV.findViewById(R.id.nombre_txt);
         TextView frase =     rV.findViewById(R.id.quote);
         ImageView img =      rV.findViewById(R.id.image);
+
         nombre.setText(personajes.get(position).getCharacter());
+        frase.setText(personajes.get(position).getQuote());
         Picasso.get().load(this.personajes.get(position).getImage())
                 .resize(350,350)
                 .centerCrop()

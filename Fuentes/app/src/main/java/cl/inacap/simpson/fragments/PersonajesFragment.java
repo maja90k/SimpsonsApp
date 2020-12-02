@@ -48,20 +48,23 @@ public class PersonajesFragment extends Fragment {
     public void onResume() {
         super.onResume();
         queue = Volley.newRequestQueue(this.getActivity());
+
         this.persList = getView().findViewById(R.id.personajes_Lv);
         this.personajesAdapter = new PersonajesAdapters(this.getActivity(),R.layout.list_personajes, this.personajes);
         this.persList.setAdapter(this.personajesAdapter);
-        JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET, "https://thesimpsonsquoteapi.glitch.me/quotes?count=num", null,
+
+        JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET,
+                "https://thesimpsonsquoteapi.glitch.me/quotes?count=num", null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             personajes.clear();
-                            Personaje[] array =
+                            Personaje[] perObj =
                             new Gson().fromJson(response.getString("results"), Personaje[].class);
-                            personajes.addAll(Arrays.asList(array));
+                            personajes.addAll(Arrays.asList(perObj));
                         }catch (Exception ex){
-                            personajes.clear();
+                            personajes = null;
                             Log.e("PERSONAJES FRAGMENT", "ERROR");
                         }finally {
                             personajesAdapter.notifyDataSetChanged();
