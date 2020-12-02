@@ -1,25 +1,43 @@
 package cl.inacap.simpson.adapters;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import cl.inacap.simpson.R;
+import cl.inacap.simpson.adapters.PersonajesAdapters;
 import cl.inacap.simpson.dto.Personaje;
 
 public class PersonajesAdapters extends ArrayAdapter<Personaje> {
+
 
     private List<Personaje> personajes;
     private Activity activity;
@@ -36,14 +54,18 @@ public class PersonajesAdapters extends ArrayAdapter<Personaje> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = this.activity.getLayoutInflater();
         View rV = inflater.inflate(R.layout.list_personajes, null, true);
-        TextView nombre =    rV.findViewById(R.id.nombre_txt);
-        TextView frase =     rV.findViewById(R.id.quote);
-        ImageView img =      rV.findViewById(R.id.image);
+
+        TextView nombre = rV.findViewById(R.id.nombre_txt);
+        TextView frase = rV.findViewById(R.id.quote);
+        ImageView img = rV.findViewById(R.id.image);
+
+
         nombre.setText(personajes.get(position).getCharacter());
         Picasso.get().load(this.personajes.get(position).getImage())
-                .resize(350,350)
+                .resize(350, 350)
                 .centerCrop()
                 .into(img);
         return rV;
     }
+
 }
