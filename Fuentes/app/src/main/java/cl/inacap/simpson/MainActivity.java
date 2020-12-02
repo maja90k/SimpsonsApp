@@ -27,7 +27,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import cl.inacap.simpson.adapters.PersonajesAdapters;
+<<<<<<< HEAD
 import cl.inacap.simpson.dto.Personaje;
+=======
+import cl.inacap.simpson.fragments.PersonajesFragment;
+>>>>>>> 264d5fc4d05ed4fb56e62ccf5cadf71859c6c330
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,11 +52,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
         this.vp = findViewById(R.id.vPager);
         this.button = findViewById(R.id.soliBtn);
         this.spinner = findViewById(R.id.spinner_per);
 
         ArrayAdapter<CharSequence> opcion = ArrayAdapter.createFromResource(this, R.array.frases, android.R.layout.simple_spinner_item);
+=======
+        this.vp   =     findViewById(R.id.vPager);
+        this.button =   findViewById(R.id.soliBtn);
+
+
+        this.spinner =  findViewById(R.id.spinner_per);
+        ArrayAdapter<CharSequence> opcion = ArrayAdapter.createFromResource(this,R.array.frases, android.R.layout.simple_spinner_item );
+>>>>>>> 264d5fc4d05ed4fb56e62ccf5cadf71859c6c330
         spinner.setAdapter(opcion);
 
         this.button.setOnClickListener(new View.OnClickListener() {
@@ -61,10 +74,18 @@ public class MainActivity extends AppCompatActivity {
                 if (spinner != null) {
                     //Aqui  despues de haber solicitado el "consejo"
                     //deberia de mostrar el viewpager con el consejo y del personaje proviniente.
+<<<<<<< HEAD
 
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Seleccione un personaje", Toast.LENGTH_SHORT).show();
+=======
+                    vp.getCurrentItem();
+                    //pero como obtenemos los datos de la api dentro del viewPager?
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"Seleccione un personaje", Toast.LENGTH_SHORT).show();
+>>>>>>> 264d5fc4d05ed4fb56e62ccf5cadf71859c6c330
                 }
             }
         });

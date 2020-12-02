@@ -11,11 +11,15 @@
 
     <Spinner
         android:id="@+id/spinner_per"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/marginTop"
         android:layout_width="132dp"
         android:layout_height="wrap_content"></Spinner>
 
     <Button
         android:id="@+id/soliBtn"
+        android:layout_marginTop="@dimen/marginTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
@@ -25,6 +29,7 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vPager"
+        android:layout_marginTop="@dimen/marginTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></androidx.viewpager.widget.ViewPager>
 
