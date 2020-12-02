@@ -1,6 +1,7 @@
 package cl.inacap.simpson.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,24 +23,27 @@ import cl.inacap.simpson.dto.Personaje;
 
 public class PersonajesAdapters extends ArrayAdapter<Personaje>{
 
-    private List<Personaje> personajes;
-    private Activity activity;
+    List<Personaje> personajes;
+    Activity activity;
+    Context context;
 
-    public PersonajesAdapters(@NonNull Activity context, int resource, @NonNull List<Personaje> objects, ) {
+    public PersonajesAdapters(@NonNull Context context, int resource, @NonNull List<Personaje> objects ) {
         super(context, resource, objects);
         this.personajes = objects;
-        this.activity = context;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = this.activity.getLayoutInflater();
-        View rV = inflater.inflate(R.layout.list_personajes, null, true);
 
-        TextView nombre =    rV.findViewById(R.id.nombre_txt);
-        TextView frase =     rV.findViewById(R.id.quote);
-        ImageView img =      rV.findViewById(R.id.image);
+        View view = convertView;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view  = inflater.inflate(R.layout.list_personajes, null, true);
+
+        TextView nombre =    view.findViewById(R.id.nombre_txt);
+        TextView frase =     view.findViewById(R.id.quote);
+        ImageView img =      view.findViewById(R.id.image);
 
         nombre.setText(personajes.get(position).getCharacter());
         frase.setText(personajes.get(position).getQuote());
@@ -47,6 +51,12 @@ public class PersonajesAdapters extends ArrayAdapter<Personaje>{
                 .resize(350,350)
                 .centerCrop()
                 .into(img);
-        return rV;
+        return view;
     }
+
+    @Override
+    public int getCount() {
+        return super.getCount();
+    }
+
 }
