@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.pl = findViewById(R.id.persoList);
-        jsonDownload();
 
         this.spinner = findViewById(R.id.spinner_per);
         ArrayAdapter<CharSequence> opcion = ArrayAdapter.createFromResource(this, R.array.frases, android.R.layout.simple_spinner_item);
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (spinner!=null){
-
+                    jsonDownload();
 
                 }else{
                     Toast.makeText(getApplicationContext(),"Seleccione un personaje", Toast.LENGTH_SHORT).show();
@@ -88,15 +87,12 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url_json, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                personajes = new ArrayList<>();
                 try {
-                    personajes = new ArrayList<>();
-                    JSONObject object = new JSONObject(response);
-                    JSONArray jsonArray = object.getJSONArray("personajes");
+                    JSONArray jsonArray = new JSONArray(response);
                     for(int i=0; i<jsonArray.length();i++){
                         Personaje p = new Personaje();
                         JSONObject innerObject = jsonArray.getJSONObject(i);
-                        Log.e(" error", object.toString());
                         String nombre =    innerObject.getString("character");
                         String frase =     innerObject.getString("quote");
                         String img =      innerObject.getString("image");
@@ -104,20 +100,23 @@ public class MainActivity extends AppCompatActivity {
                         p.setQuote(frase);
                         p.setImage(img);
                         personajes.add(p);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                PersonajesAdapters adapter = new PersonajesAdapters(MainActivity.this, R.layout.list_personajes, personajes);
+                PersonajesAdapters adapter = new PersonajesAdapters(MainActivity.this,
+                        R.layout.list_personajes, personajes);
                 pl.setAdapter(adapter);
-
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
             }
         });
+
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
     }
