@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (spinner!=null){
+                    
                     jsonDownload();
 
                 }else{
