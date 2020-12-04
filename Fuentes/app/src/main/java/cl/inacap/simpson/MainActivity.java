@@ -10,6 +10,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,21 +27,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-//import com.squareup.picasso.Request;
+
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import cl.inacap.simpson.adapters.PersonajesAdapters;
@@ -54,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView pl;
     private List<Personaje> personajes;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,14 +58,31 @@ public class MainActivity extends AppCompatActivity {
         jsonDownload();
 
         this.spinner = findViewById(R.id.spinner_per);
-        ArrayAdapter<CharSequence> opcion = ArrayAdapter.createFromResource(this, R.array.frases, android.R.layout.simple_spinner_item);
-        spinner.setAdapter(opcion);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long i) {
+
+
+                String elegido = (String) adapterView.getItemAtPosition(pos);
+                for (Personaje personaje: personajes){
+                    if (personaje.getQuote().equals(elegido)){
+                        jsonDownload();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         this.button =   findViewById(R.id.soliBtn);
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (spinner!=null){
 
 
@@ -83,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     String url_json = "https://thesimpsonsquoteapi.glitch.me/quotes?count=num";
+
+
 
     public void jsonDownload(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url_json, new Response.Listener<String>() {
